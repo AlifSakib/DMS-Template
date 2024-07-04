@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal, Title } from "rizzui";
 
 export default function Home() {
