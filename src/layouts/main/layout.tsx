@@ -3,7 +3,7 @@
 import Header from "@/layouts/main/header";
 import Sidebar from "./sidebar";
 import { useDispatch } from "react-redux";
-import { toggleDrawer } from "@/redux/features/drawer/drawerSlice";
+import { closeDrawer, toggleDrawer } from "@/redux/features/drawer/drawerSlice";
 
 export default function MainLayout({
   children,
@@ -17,7 +17,7 @@ export default function MainLayout({
         <Header />
         <Sidebar />
         <div
-          onClick={() => dispatch(toggleDrawer())}
+          onClick={() => dispatch(closeDrawer())}
           className="flex flex-grow flex-col px-4 pb-6 pt-2 md:px-5 lg:px-6 lg:pb-8 3xl:px-8 3xl:pt-4 4xl:px-10 4xl:pb-9"
         >
           {children}
