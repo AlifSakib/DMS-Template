@@ -8,10 +8,10 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`absolute top-[65px] right-0 flex flex-col justify-between border bg-white transition-all duration-300 ${
-        isOpen ? "opacity-100 w-[300px]" : "max-w-0 opacity-0"
+      className={`fixed top-[65px] right-0 flex flex-col justify-between border bg-white transition-all duration-300 transform ${
+        isOpen ? "translate-x-0 w-[320px]" : "translate-x-full w-0"
       }`}
-      style={{ height: "calc(100vh - 65px)" }} // Adjust the height here
+      style={{ height: "calc(100vh - 65px)" }}
     >
       <div className="px-4 py-6 flex-1">
         <ul className="space-y-1">

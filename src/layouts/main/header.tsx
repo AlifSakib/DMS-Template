@@ -1,12 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import HeaderMenuRight from "@/layouts/header-menu-right";
-import StickyHeader from "@/layouts/sticky-header";
-import { Title } from "rizzui";
-import SearchWidget from "@/components/search/search";
 import { useDispatch } from "react-redux";
-import { closeModal } from "@/redux/features/modal/modalSlice";
+
 import {
   closeDrawer,
   openDrawer,
