@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "react-big-calendar/lib/css/react-big-calendar.css";
-
 @layer base {
   /* default theme */
   :root {
@@ -865,18 +863,18 @@ td.rc-table-cell-fix-right {
 /*
 * All form inputs common css
 */
-.isomorphic-form label > span,
-.isomorphic-form .rizzui-phone-number > label {
+.dms-form label > span,
+.dms-form .rizzui-phone-number > label {
   @apply font-medium;
 }
 
-.isomorphic-form label > div {
+.dms-form label > div {
   @apply leading-none;
 }
 
-.isomorphic-form label > div,
-.isomorphic-form label input,
-.isomorphic-form label select {
+.dms-form label > div,
+.dms-form label input,
+.dms-form label select {
   @apply !text-sm;
 }
 

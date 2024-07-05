@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { inter, lexendDeca } from "@/app/fonts";
-import HydrogenLayout from "@/layouts/hydrogen/layout";
-import GlobalDrawer from "@/app/shared/drawer-views/container";
-import GlobalModal from "@/app/shared/modal-views/container";
 import { cn } from "@/utils/class-names";
 import "@/app/globals.css";
 import MainLayout from "@/layouts/main/layout";
@@ -33,10 +30,6 @@ export default function RootLayout({
         >
           <ThemeProvider>
             <MainLayout>{children}</MainLayout>
-
-            <GlobalDrawer />
-
-            <GlobalModal />
           </ThemeProvider>
         </body>
       </html>
