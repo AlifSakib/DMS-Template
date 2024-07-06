@@ -1,4 +1,5 @@
 "use client";
+import useAuthCheck from "@/hooks/use-auth-check";
 import { store } from "@/redux/store";
 import { Provider } from "react-redux";
 

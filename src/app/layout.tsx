@@ -3,12 +3,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { inter, lexendDeca } from "@/app/fonts";
 import { cn } from "@/utils/class-names";
 import "@/app/globals.css";
-import MainLayout from "@/layouts/main/layout";
-import { useState } from "react";
 import Providers from "@/lib/Providers";
 
 export const metadata: Metadata = {
-  title: "App Name",
+  title: "Digi Qore",
   description: "Write your app description",
 };
 
@@ -28,9 +26,7 @@ export default function RootLayout({
           suppressHydrationWarning
           className={cn(inter.variable, lexendDeca.variable, "font-inter")}
         >
-          <ThemeProvider>
-            <MainLayout>{children}</MainLayout>
-          </ThemeProvider>
+          <ThemeProvider>{children}</ThemeProvider>
         </body>
       </html>
     </Providers>

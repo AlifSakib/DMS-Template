@@ -20,6 +20,12 @@ const config: Config = {
     },
     extend: {
       colors: {
+        customBlue: {
+          DEFAULT: "#21839E",
+        },
+        customGreen: {
+          DEFAULT: "#4C8F75",
+        },
         gray: {
           0: "rgb(var(--gray-0) / <alpha-value>)",
           50: "rgb(var(--gray-50) / <alpha-value>)",

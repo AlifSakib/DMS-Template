@@ -1,13 +1,7 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import ReusableTable from "@/components/ui/basic-table";
-import Tabs from "@/components/ui/tabs";
-import { Title } from "rizzui";
+const HomePage = () => {
+  return redirect("/client");
+};
 
-export default function Home() {
-  return (
-    <>
-      <Title>Start Building your App</Title>
-    </>
-  );
-}
+export default HomePage;

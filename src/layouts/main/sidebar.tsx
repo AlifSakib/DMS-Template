@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 
 export default function Sidebar() {
