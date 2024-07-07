@@ -8,7 +8,7 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!isAuth) {
-      redirect("/signin");
+      redirect("/auth/signin");
     }
   }, [isAuth]);
 

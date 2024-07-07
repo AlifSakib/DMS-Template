@@ -7,14 +7,15 @@ import { Button, Checkbox, Input, Password } from "rizzui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUserSchema } from "@/schemas/login-user/login-user";
 import classNames from "classnames";
+import { resetPasswordSchema } from "@/schemas/reset-password/reset-password";
 
-const SignInForm = () => {
+const ResetPasswordForm = () => {
   const [isPending, startTransition] = useTransition();
   const isDesktop2xl = useMediaQuery("(max-width: 1530px)");
 
   type FormValues = {
     email: string;
-    password: string;
+
   };
 
   const {
@@ -23,11 +24,11 @@ const SignInForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(loginUserSchema),
+    resolver: yupResolver(resetPasswordSchema),
     mode: "all",
     defaultValues: {
       email: "",
-      password: "",
+
     },
   });
 
@@ -43,11 +44,11 @@ const SignInForm = () => {
         className="
         2xl:text-2xl text-xl font-light text-primary 2xl:mt-0 mt-0"
       >
-        Hello,
+        Enter your email address to reset your password.
       </div>
-      <div className="2xl:text-4xl font-bold text-3xl text-primary mt-2">
+      {/* <div className="2xl:text-4xl font-bold text-3xl text-primary mt-2">
         Welcome!
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit(onSubmit)} className="mt-5 2xl:mt-7">
         <div>
           <Input
@@ -60,42 +61,24 @@ const SignInForm = () => {
           />
         </div>
 
-        <div className="mt-3.5">
-          <div className="relative">
-            <Password
-              disabled={isPending}
-              {...register("password")}
-              id="password"
-              placeholder="Enter your password"
-              error={errors.password?.message}
-            />
-          </div>
-        </div>
-        {/* {errors.password && (
-          <div className="text-destructive text-red-500 mt-2">
-            {errors.password.message}
-          </div>
-        )} */}
 
-        <div className="mt-5 mb-8 flex gap-2 w-full justify-end">
-          <Link
-            href="/auth/forgot"
-            className="flex-none text-sm text-primary underline"
-          >
-            Reset Password?
-          </Link>
-        </div>
         <Button
           type="submit"
-          className="w-full disabled:opacity-50 bg-gradient-to-r from-customBlue to-customGreen"
+          className="w-full disabled:opacity-50 bg-gradient-to-r from-customBlue to-customGreen mt-5"
           disabled={isPending}
           size={!isDesktop2xl ? "lg" : "md"}
         >
-          {isPending ? "Loading..." : "Sign In"}
+          {isPending ? "Loading..." : "Send Reset Link"}
         </Button>
       </form>
+      <div className="mt-5 2xl:mt-8 text-center text-base text-default-600">
+        Forget it? Send me back to{" "}
+        <Link href="/auth/signin" className="text-primary hover:underline font-bold">
+          Sign In
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default SignInForm;
+export default ResetPasswordForm;

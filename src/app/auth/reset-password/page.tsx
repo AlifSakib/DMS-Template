@@ -1,8 +1,9 @@
 import Image from "next/image";
-import SignInForm from "./sign-in-form";
-import Logo from "../../../public/digiqore.png";
 
-export default function SignIn() {
+import Logo from "../../../../public/digiqore.png";
+import ResetPasswordForm from "./reset-form";
+
+export default function ResetPassword() {
   return (
     <div>
       <div className="min-h-screen bg-background flex items-center overflow-hidden w-full">
@@ -18,7 +19,7 @@ export default function SignIn() {
 
           <div className="min-h-screen basis-full md:basis-3/5 w-full px-4 py-5 flex justify-center items-center">
             <div className="w-full lg:w-[480px]">
-              <SignInForm />
+              <ResetPasswordForm />
             </div>
           </div>
         </div>
