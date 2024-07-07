@@ -4,7 +4,7 @@ import { selectOption } from "@/redux/features/configuration/configurationSlice"
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
-const ConfigurationPage = () => {
+const ConfigurationsPage = () => {
     const router = useRouter();
     const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const ConfigurationPage = () => {
             {
               id: 1,
               title: "Organization Settings",
-              path: "/configuration/general/organization-settings",
+              path: "/configurations/general/organization-settings",
             },
             {
               id: 2,
@@ -208,7 +208,7 @@ const ConfigurationPage = () => {
               {option.options.map((sub_option) => (
                 <div
                   onClick={() => handleOptionClick(sub_option)}
-                  className="relative w-56 h-32 flex justify-center items-center cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out"
+                  className="relative w-52 h-32 flex justify-center items-center cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out"
                   key={sub_option.id}
                 >
                   {/* Icon positioned at the top right corner */}
@@ -247,4 +247,4 @@ const ConfigurationPage = () => {
     );
 }
 
-export default ConfigurationPage
+export default ConfigurationsPage

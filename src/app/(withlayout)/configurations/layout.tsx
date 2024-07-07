@@ -6,7 +6,7 @@ import { redirect, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-const ClientLayout = ({ children }: { children: React.ReactNode }) => {
+const ConfigurationsLayout = ({ children }: { children: React.ReactNode }) => {
   const isAuth = true;
 
   useEffect(() => {
@@ -18,4 +18,4 @@ const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   return <ConfigurationLayout>{children}</ConfigurationLayout>;
 };
 
-export default ClientLayout;
+export default ConfigurationsLayout;
