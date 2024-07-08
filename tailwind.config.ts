@@ -81,6 +81,7 @@ const config: Config = {
         inter: ["var(--font-inter)"],
         lexend: ["var(--font-lexend)"],
       },
+      
     },
   },
   plugins: [

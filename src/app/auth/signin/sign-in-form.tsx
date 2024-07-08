@@ -3,12 +3,16 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button, Checkbox, Input, Password } from "rizzui";
+import { Button, Input, Password } from "rizzui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUserSchema } from "@/schemas/login-user/login-user";
-import classNames from "classnames";
+
+import { routes } from "@/config/routes";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
+  const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
   const [isPending, startTransition] = useTransition();
   const isDesktop2xl = useMediaQuery("(max-width: 1530px)");
 
@@ -34,18 +38,24 @@ const SignInForm = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     startTransition(() => {
       console.log(data);
+      setShowModal(true);
+      // setTimeout(() => {
+      //   setShowModal(false);
+      //   router.push(routes.client.page);
+      // }, 3000); // Adjust the duration as needed
     });
   };
+
 
   return (
     <div className="w-full py-10">
       <div
         className="
-        2xl:text-2xl text-xl font-light text-primary 2xl:mt-0 mt-0"
+        2xl:text-6xl text-xl font-light text-primary 2xl:mt-0 mt-0"
       >
         Hello,
       </div>
-      <div className="2xl:text-4xl font-bold text-3xl text-primary mt-2">
+      <div className="2xl:text-7xl font-bold text-3xl text-primary mt-2">
         Welcome!
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-5 2xl:mt-7">
@@ -79,7 +89,7 @@ const SignInForm = () => {
 
         <div className="mt-5 mb-8 flex gap-2 w-full justify-end">
           <Link
-            href="/auth/reset-password"
+            href={routes.auth.resetPassword}
             className="flex-none text-sm text-primary underline"
           >
             Reset Password?
@@ -94,6 +104,7 @@ const SignInForm = () => {
           {isPending ? "Loading..." : "Sign In"}
         </Button>
       </form>
+
     </div>
   );
 };

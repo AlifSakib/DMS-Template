@@ -1,3 +1,4 @@
+import Label from "@/components/ui/label";
 import { getErrorMessageByPropertyName } from "../../../utils/schema-validators";
 import { useFormContext, Controller } from "react-hook-form";
 import { Checkbox } from "rizzui"; // Assuming you have this component available
@@ -34,15 +35,18 @@ const FormCheckbox = ({
 
   return (
     <div className="my-4">
-      <div>
-        {label && (
-          <label
-            htmlFor={id}
+      <div >
+        <div>
+        {/* {label && (
+          <Label
+            htmlFor={id || name}
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             {label} {required && <span className="text-red-500">*</span>}
-          </label>
-        )}
+        
+          </Label>
+        )} */}
+        </div>
         <div>
           <Controller
             control={control}
@@ -55,7 +59,7 @@ const FormCheckbox = ({
                   <Checkbox
                     key={option.value}
                     label={option.label}
-                    size="sm"
+                    size="lg"
                     checked={field.value.includes(option.value)}
                     onChange={() => {
                       const newValue = field.value.includes(option.value)
@@ -63,7 +67,7 @@ const FormCheckbox = ({
                         : [...field.value, option.value];
                       field.onChange(newValue);
                     }}
-                    className="m-2"
+                    className="mt-2"
                   />
                 ))}
               </div>

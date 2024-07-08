@@ -8,8 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginUserSchema } from "@/schemas/login-user/login-user";
 import classNames from "classnames";
 import { resetPasswordSchema } from "@/schemas/reset-password/reset-password";
+import { routes } from "@/config/routes";
+import { useRouter } from "next/navigation";
 
 const ResetPasswordForm = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const isDesktop2xl = useMediaQuery("(max-width: 1530px)");
 
@@ -62,21 +65,27 @@ const ResetPasswordForm = () => {
         </div>
 
 
+        <div className="flex justify-between items-center mt-5">
+        <div >
+          <Link href={routes.auth.signin}>
+          <h2 className="  text-center text-[16px] text-default-600 font-normal bg-clip-text text-transparent bg-gradient-to-r from-customBlue to-customGreen">
+            Return to login
+          </h2>
+          </Link>
+          <div className="h-[1px]  bg-gradient-to-r from-customBlue to-customGreen "></div>
+
+        </div>
         <Button
           type="submit"
-          className="w-full disabled:opacity-50 bg-gradient-to-r from-customBlue to-customGreen mt-5"
+          className=" disabled:opacity-50 bg-gradient-to-r from-customBlue to-customGreen "
           disabled={isPending}
           size={!isDesktop2xl ? "lg" : "md"}
         >
           {isPending ? "Loading..." : "Send Reset Link"}
         </Button>
+        </div>
       </form>
-      <div className="mt-5 2xl:mt-8 text-center text-base text-default-600">
-        Forget it? Send me back to{" "}
-        <Link href="/auth/signin" className="text-primary hover:underline font-bold">
-          Sign In
-        </Link>
-      </div>
+      
     </div>
   );
 };

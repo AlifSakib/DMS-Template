@@ -33,7 +33,9 @@ const ConfigurationsLayout = ({ children }: { children: React.ReactNode }) => {
     }
   }, [selector, pathname]);
 
-  return <ConfigurationLayout>{children}</ConfigurationLayout>;
+  return <ConfigurationLayout>
+    {children}
+  </ConfigurationLayout>;
 };
 
 export default ConfigurationsLayout;

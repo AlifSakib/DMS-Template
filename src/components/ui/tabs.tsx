@@ -7,11 +7,13 @@ type TabItem = {
 
 interface TabsProps {
   tabs: TabItem[];
+  selectedIndex: number;
+  onSelect: (index: number) => void;
 }
 
-const Tabs: React.FC<TabsProps> = ({ tabs }) => {
+const Tabs: React.FC<TabsProps> = ({ tabs, selectedIndex, onSelect }) => {
   return (
-    <Tab>
+    <Tab selectedIndex={selectedIndex} onChange={onSelect}>
       <Tab.List>
         {tabs.map((tab, index) => (
           <Tab.ListItem key={index}>{tab.label}</Tab.ListItem>
@@ -27,6 +29,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
 };
 
 export default Tabs;
+
 
 // usages
 

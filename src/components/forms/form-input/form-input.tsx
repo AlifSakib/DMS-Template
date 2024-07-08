@@ -33,7 +33,7 @@ const FormInput = ({
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
-    <div className={`mb-4 ${size === "large" ? "w-full" : "w-1/2"}`}>
+    <div className={`${size === "large" ? "w-full" : "w-1/2"}`}>
       <Controller
         control={control}
         name={name}
