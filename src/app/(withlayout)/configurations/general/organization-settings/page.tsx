@@ -77,6 +77,7 @@ const OrganizationSettingsPage = () => {
                         tabs={tabs}
                         selectedIndex={selectedTab}
                         onSelect={handleTabClick}
+                        
                     />
                 </div>
             </form>
