@@ -1,13 +1,13 @@
 import { baseApi } from "./api/baseApi";
 import drawerReducer from "./features/drawer/drawerSlice";
-import modalReducer from "./features/modal/modalSlice";
 import authReducer from "./features/auth/authSlice";
 import configurationReducer from "./features/configuration/configurationSlice";
+import organizationReducer from "./features/organizational-settings/organizational-slice";
 
 export const reducer = {
   [baseApi.reducerPath]: baseApi.reducer,
   drawer: drawerReducer,
-  modal: modalReducer,
   auth: authReducer,
-  configuration : configurationReducer
+  configuration: configurationReducer,
+  organizationalSettings: organizationReducer,
 };

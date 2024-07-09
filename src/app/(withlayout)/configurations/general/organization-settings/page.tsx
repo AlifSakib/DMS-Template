@@ -62,10 +62,10 @@ const OrganizationSettingsPage = () => {
           language: "",
           date_or_number_format: "",
           timezone: "",
-          working_days: "",
+          working_days: ["sat", "sun"],
           working_time: {
-            start: "",
-            end: "",
+            start: "10:00",
+            end: "20:00",
           },
           holidays: [],
         },

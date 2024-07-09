@@ -1,37 +1,24 @@
-// redux/features/modal/modalSlice.ts
+// redux/features/modals/modalsSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalState {
-  isOpen: boolean;
-  view: React.ReactNode | null;
-  customSize?: string;
+  [key: string]: boolean;
 }
 
-const initialState: ModalState = {
-  isOpen: false,
-  view: null,
-  customSize: "320px",
-};
+const initialState: ModalState = {};
 
-const modalSlice = createSlice({
-  name: "modal",
+const modalsSlice = createSlice({
+  name: "modals",
   initialState,
   reducers: {
-    openModal: (
-      state,
-      action: PayloadAction<{ view: React.ReactNode; customSize?: string }>
-    ) => {
-      const { view, customSize } = action.payload;
-      state.isOpen = true;
-      state.view = view;
-      state.customSize = customSize;
+    showModal: (state, action: PayloadAction<string>) => {
+      state[action.payload] = true;
     },
-    closeModal: (state) => {
-      state.isOpen = false;
+    hideModal: (state, action: PayloadAction<string>) => {
+      state[action.payload] = false;
     },
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
-
-export default modalSlice.reducer;
+export const { showModal, hideModal } = modalsSlice.actions;
+export default modalsSlice.reducer;

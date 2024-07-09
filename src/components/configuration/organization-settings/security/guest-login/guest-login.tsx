@@ -1,7 +1,7 @@
 import ReusableModal from "@/components/ui/modal";
 import { Button } from "rizzui";
 
-const GuestLoginModal = ({ isModalOpen, closeModal }: any) => {
+const GuestLogin = ({ isModalOpen, closeModal }: any) => {
   return (
     <div>
       <ReusableModal isOpen={isModalOpen} onClose={closeModal} size="lg">
@@ -26,4 +26,4 @@ const GuestLoginModal = ({ isModalOpen, closeModal }: any) => {
   );
 };
 
-export default GuestLoginModal;
+export default GuestLogin;

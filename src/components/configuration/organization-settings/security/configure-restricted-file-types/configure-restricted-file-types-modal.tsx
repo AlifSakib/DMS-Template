@@ -1,128 +1,25 @@
 import ReusableModal from "@/components/ui/modal";
 import Table, { HeaderCell } from "@/components/ui/table";
-import { useMemo, useState } from "react";
-import { Button, Input, Title } from "rizzui";
-import { Checkbox, Avatar, Text, Badge } from "rizzui";
+import React, { useState, useMemo, useEffect } from "react";
+import { Badge, Checkbox, Button, Text, Title, Input } from "rizzui"; // adjust imports according to your setup
 
 const initialData = [
   {
     id: "1",
-    employee: {
-      name: "Jon Brown",
-      userName: "@fredchaparro",
-      avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-    },
-    designation: {
-      role: "Front-End Developer",
-      company: "REDQ",
-    },
-    phoneNumber: "+880136987584",
-    email: "jhondoe@aegonui.com",
-    status: "Active",
+    name: "Text Files",
+    type: "system",
   },
   {
     id: "2",
-    employee: {
-      name: "Jon Brown",
-      userName: "@fredchaparro",
-      avatar: "https://randomuser.me/api/portraits/men/2.jpg",
-    },
-    designation: {
-      role: "Front-End Developer",
-      company: "REDQ",
-    },
-    phoneNumber: "+880136987584",
-    email: "jhondoe@aegonui.com",
-    status: "Active",
+    name: "Graphics Files",
+    type: "system",
   },
   {
     id: "3",
-    employee: {
-      name: "Jon Brown",
-      userName: "@fredchaparro",
-      avatar: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    designation: {
-      role: "Front-End Developer",
-      company: "REDQ",
-    },
-    phoneNumber: "+880136987584",
-    email: "jhondoe@aegonui.com",
-    status: "Active",
-  },
-  {
-    id: "4",
-    employee: {
-      name: "Jon Brown",
-      userName: "@fredchaparro",
-      avatar: "https://randomuser.me/api/portraits/men/4.jpg",
-    },
-    designation: {
-      role: "Front-End Developer",
-      company: "REDQ",
-    },
-    phoneNumber: "+880136987584",
-    email: "jhondoe@aegonui.com",
-    status: "Active",
-  },
-  {
-    id: "5",
-    employee: {
-      name: "Jon Brown",
-      userName: "@fredchaparro",
-      avatar: "https://randomuser.me/api/portraits/men/5.jpg",
-    },
-    designation: {
-      role: "Front-End Developer",
-      company: "REDQ",
-    },
-    phoneNumber: "+880136987584",
-    email: "jhondoe@aegonui.com",
-    status: "Active",
-  },
-  {
-    id: "6",
-    employee: {
-      name: "Jon Brown",
-      userName: "@fredchaparro",
-      avatar: "https://randomuser.me/api/portraits/men/6.jpg",
-    },
-    designation: {
-      role: "Front-End Developer",
-      company: "REDQ",
-    },
-    phoneNumber: "+880136987584",
-    email: "jhondoe@aegonui.com",
-    status: "Active",
+    name: "Audio Files",
+    type: "system",
   },
 ];
-
-function getStatusBadge(status: string) {
-  switch (status.toLowerCase()) {
-    case "pending":
-      return <Badge variant="flat">{status}</Badge>;
-    case "active":
-      return (
-        <Badge variant="flat" color="success">
-          {status}
-        </Badge>
-      );
-    case "warning":
-      return (
-        <Badge variant="flat" color="warning">
-          {status}
-        </Badge>
-      );
-    case "danger":
-      return (
-        <Badge variant="flat" color="danger">
-          {status}
-        </Badge>
-      );
-    default:
-      return null;
-  }
-}
 
 const getColumns = (
   order: string,
@@ -140,7 +37,7 @@ const getColumns = (
           variant="flat"
           onClick={() => {
             // log the row index
-            console.log(row.id);
+            console.log(row);
           }}
         />
       </div>
@@ -149,69 +46,28 @@ const getColumns = (
   {
     title: (
       <HeaderCell
-        title="Id"
+        title="Name"
         sortable
-        ascending={order === "asc" && column === "id"}
+        ascending={order === "asc" && column === "name"}
       />
     ),
-    onHeaderCell: () => onHeaderClick("id"),
-    dataIndex: "id",
-    key: "id",
-    width: 50,
-  },
-  {
-    title: <HeaderCell title="Employee" />,
-    dataIndex: "employee",
-    key: "employee",
+    onHeaderCell: () => onHeaderClick("name"),
+    dataIndex: "name",
+    key: "name",
     width: 250,
-    render: (employee: any) => (
-      <div className="flex items-center">
-        <Avatar name="John Doe" src={employee.avatar} />
-        <div className="ml-3 rtl:ml-0 rtl:mr-3">
-          <Text as="h6" className="mb-0.5 !text-sm font-medium">
-            {employee.name}
-          </Text>
-          <Text as="p" className="text-xs text-gray-400">
-            {employee.userName}
-          </Text>
-        </div>
-      </div>
+  },
+  {
+    title: (
+      <HeaderCell
+        title="Type"
+        sortable
+        ascending={order === "asc" && column === "type"}
+      />
     ),
-  },
-  {
-    title: <HeaderCell title="Designation" />,
-    dataIndex: "designation",
-    key: "designation",
-    width: 320,
-    render: (designation: any) => (
-      <div>
-        <Text as="h6" className="mb-0.5 !text-sm font-medium">
-          {designation.role}
-        </Text>
-        <Text as="p" className="text-xs text-gray-400">
-          {designation.company}
-        </Text>
-      </div>
-    ),
-  },
-  {
-    title: <HeaderCell title="Phone Number" />,
-    dataIndex: "phoneNumber",
-    key: "phoneNumber",
-    width: 200,
-  },
-  {
-    title: <HeaderCell title="Email" />,
-    dataIndex: "email",
-    key: "email",
-    width: 200,
-  },
-  {
-    title: <HeaderCell title="Status" />,
-    dataIndex: "status",
-    key: "status",
-    width: 120,
-    render: (value: string) => getStatusBadge(value),
+    onHeaderCell: () => onHeaderClick("type"),
+    dataIndex: "type",
+    key: "type",
+    width: 250,
   },
   {
     title: <></>,
@@ -219,7 +75,7 @@ const getColumns = (
     key: "action",
     width: 120,
     render: (_: string, row: any) => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 ">
         <button
           type="button"
           className="text-primary underline"
@@ -242,23 +98,30 @@ const ConfigureRestrictedFileTypesModal = ({
   const [order, setOrder] = useState<string>("desc");
   const [column, setColumn] = useState<string>("");
   const [data, setData] = useState<typeof initialData>(initialData);
-  const onHeaderClick = (value: string) => ({
-    onClick: () => {
-      setColumn(value);
-      setOrder(order === "desc" ? "asc" : "desc");
-      if (order === "desc") {
-        // @ts-ignore
-        setData([...data.sort((a, b) => (a[value] > b[value] ? -1 : 1))]);
-      } else {
-        // @ts-ignore
-        setData([...data.sort((a, b) => (a[value] > b[value] ? 1 : -1))]);
-      }
-    },
-  });
-  const columns: any = useMemo(
-    () => getColumns(order, column, onHeaderClick),
-    [order, column, onHeaderClick]
-  );
+  const [search, setSearch] = useState<string>("");
+
+  const columns: any = useMemo(() => {
+    const onHeaderClick = (value: string) => ({
+      onClick: () => {
+        setColumn(value);
+        setOrder(order === "desc" ? "asc" : "desc");
+        if (order === "desc") {
+          // @ts-ignore
+          setData([...data.sort((a, b) => (a[value] > b[value] ? -1 : 1))]);
+        } else {
+          // @ts-ignore
+          setData([...data.sort((a, b) => (a[value] > b[value] ? 1 : -1))]);
+        }
+      },
+    });
+    return getColumns(order, column, onHeaderClick);
+  }, [order, column, data]);
+
+  const filteredData = useMemo(() => {
+    return data.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, data]);
 
   console.log(data, columns);
 
@@ -275,11 +138,28 @@ const ConfigureRestrictedFileTypesModal = ({
                 Choose file type lists to restrict the import of such files.
               </p>
 
-              <Table data={data} columns={columns} className="text-sm" />
+              <div className="flex justify-end">
+                <Input
+                  type="text"
+                  placeholder="Search by name"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+
+              <Table
+                data={filteredData}
+                columns={columns}
+                className="text-sm"
+                rowClassName={(record, index) =>
+                  index % 2 === 0 ? "bg-gray-100" : ""
+                }
+                rowKey="id"
+              />
 
               <div className="flex gap-4  justify-end">
                 <Button onClick={closeModal} className="btn btn-secondary w-32">
-                  Cancle
+                  Cancel
                 </Button>
                 <Button className="btn btn-secondary w-32">OK</Button>
               </div>
