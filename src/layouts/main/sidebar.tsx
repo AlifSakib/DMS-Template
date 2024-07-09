@@ -1,6 +1,8 @@
 "use client";
 
+import { routes } from "@/config/routes";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import Link from "next/link";
 
 export default function Sidebar() {
   const isOpen = useAppSelector((state) => state.drawer.isOpen);
@@ -15,12 +17,12 @@ export default function Sidebar() {
       <div className="px-4 py-6 flex-1">
         <ul className="space-y-1">
           <li>
-            <a
-              href="#"
+            <Link
+              href={routes.configurations.page}
               className="block bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
             >
               Configuration
-            </a>
+            </Link>
           </li>
           {/* Add more list items as needed */}
         </ul>

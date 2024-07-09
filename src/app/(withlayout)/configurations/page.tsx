@@ -207,11 +207,11 @@ const ConfigurationsPage = () => {
                 <h2 className="text-sm font-semibold">{option.title}</h2>
               </div>
               <div className="flex flex-wrap gap-4">
-                {option.options.map((sub_option) => (
+                {option.options.map((sub_option, index) => (
                   <div
                     onClick={() => handleOptionClick(sub_option)}
                     className="relative w-52 h-32 flex justify-center items-center cursor-pointer hover:bg-gray-100 transition duration-300 ease-in-out"
-                    key={sub_option.id}
+                    key={index}
                   >
                     {/* Icon positioned at the top right corner */}
                     <Tooltip content="This is a tooltip">

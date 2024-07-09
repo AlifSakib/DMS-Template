@@ -35,9 +35,9 @@ const FormCheckbox = ({
 
   return (
     <div className="my-4">
-      <div >
+      <div>
         <div>
-        {/* {label && (
+          {/* {label && (
           <Label
             htmlFor={id || name}
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -57,7 +57,7 @@ const FormCheckbox = ({
               <div>
                 {options.map((option) => (
                   <Checkbox
-                    key={option.value}
+                    key={option.id}
                     label={option.label}
                     size="lg"
                     checked={field.value.includes(option.value)}
