@@ -1,12 +1,61 @@
-import FormCheckbox from "@/components/forms/form-checkbox";
 import FormInput from "@/components/forms/form-input/form-input";
 import FormSelect from "@/components/forms/form-select";
+import FormSingleCheckbox from "@/components/forms/form-single-checkbox";
 import Container from "@/components/ui/container";
 import Label from "@/components/ui/label";
 import SectionTitle from "@/components/ui/section-title";
-import { Title } from "rizzui";
+import GuestLoginModal from "./guest-login-modal";
+import { useEffect, useState } from "react";
+import ChangePassphrase from "./change-passphrase";
+import ChangePasswordPolicy from "./change-password-policy";
+import ConfigureRestrictedFileTypesModal from "./configure-restricted-file-types/configure-restricted-file-types-modal";
 
-const OrganizationSecuritylSettings = () => {
+interface IOrganizationSecuritylSettingsProps {
+  watch: any;
+  setValue: any;
+}
+
+const OrganizationSecuritylSettings = ({
+  watch,
+  setValue,
+}: IOrganizationSecuritylSettingsProps) => {
+  const isGuestLogin = watch("security.login.guest_login");
+
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isPassphraseOpen, setPassphraseOpen] = useState(false);
+  const [openChangePasswordPolicy, setOpenChangePasswordPolicy] =
+    useState(false);
+
+  const [
+    openConfigureRestrictedFileTypes,
+    setOpenConfigureRestrictedFileTypes,
+  ] = useState(false);
+
+  useEffect(() => {
+    if (isGuestLogin) {
+      setModalOpen(true);
+    } else {
+      setModalOpen(false);
+    }
+  }, [isGuestLogin]);
+
+  const closePassphraseModal = () => {
+    setPassphraseOpen(false);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setValue("security.login.guest_login", false);
+  };
+
+  const closePasswordPolicyModal = () => {
+    setOpenChangePasswordPolicy(false);
+  };
+
+  const closeConfigureRestrictedFileTypes = () => {
+    setOpenConfigureRestrictedFileTypes(false);
+  };
+
   return (
     <Container>
       <SectionTitle title="Login" tag="h6" weight="medium" />
@@ -16,16 +65,8 @@ const OrganizationSecuritylSettings = () => {
             Single Sign-On
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="single-sign-on"
-              options={[
-                {
-                  id: "opt1",
-                  label: "Enable single sign-on with your identity provider",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
+            <FormSingleCheckbox
+              name="security.login.single_sign_on"
               label="Enable single sign-on with your identity provider"
             />
           </div>
@@ -35,17 +76,8 @@ const OrganizationSecuritylSettings = () => {
             Guest Login
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="guest-login"
-              options={[
-                {
-                  id: "opt1",
-                  label:
-                    "Enable to log in as a guest with a predefined DocuWare user",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
+            <FormSingleCheckbox
+              name="security.login.guest_login"
               label="Enable to log in as a guest with a predefined DocuWare user"
             />
           </div>
@@ -57,14 +89,23 @@ const OrganizationSecuritylSettings = () => {
           ></Label>
           <div className="flex items-center gap-4">
             <FormInput
-              name="change user"
+              name="security.login.change_user"
               placeholder="No user specified"
               size="large"
+              disabled={!isGuestLogin}
             />
             <div className="w-[300px]">
-              <Title as="h6" fontWeight="normal">
+              <button
+                type="button"
+                disabled={isGuestLogin}
+                className={`${
+                  !isGuestLogin
+                    ? "text-gray-500 cursor-pointer"
+                    : "text-blue-600 underline cursor-pointer"
+                }`}
+              >
                 Change user
-              </Title>
+              </button>
             </div>
           </div>
         </div>
@@ -76,18 +117,19 @@ const OrganizationSecuritylSettings = () => {
             Password Policy
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="password-policy"
-              options={[
-                {
-                  id: "opt1",
-                  label: "Enforce a password policy for DocuWare passwords",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
-              label="Password Policy"
+            <FormSingleCheckbox
+              name="security.passwords.password_policy"
+              label="Enforce a password policy for DocuWare passwords"
             />
+
+            <p
+              className="text-blue-600 underline ml-10 cursor-pointer"
+              onClick={() => {
+                setOpenChangePasswordPolicy(true);
+              }}
+            >
+              Configure password policy
+            </p>
           </div>
         </div>
 
@@ -97,14 +139,20 @@ const OrganizationSecuritylSettings = () => {
           </Label>
           <div className="flex items-center gap-4">
             <FormInput
-              name="passphrase"
+              name="security.passwords.passphrase"
               placeholder="Demo Passphase"
               size="large"
+              disabled
             />
-            <div className="w-[300px]">
-              <Title as="h6" fontWeight="normal">
+            <div className="w-[300px] cursor-pointer">
+              <p
+                className="text-blue-600 underline ml-10 cursor-pointer"
+                onClick={() => {
+                  setPassphraseOpen(true);
+                }}
+              >
                 Change passphrase
-              </Title>
+              </p>
             </div>
           </div>
         </div>
@@ -116,16 +164,8 @@ const OrganizationSecuritylSettings = () => {
             Automatic log out
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="automatic-log-out"
-              options={[
-                {
-                  id: "opt1",
-                  label: "Log out automatically after being inactive for",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
+            <FormSingleCheckbox
+              name="security.session_timeout.autometic_log_out"
               label="Log out automatically after being inactive for"
             />
           </div>
@@ -140,7 +180,7 @@ const OrganizationSecuritylSettings = () => {
           <FormSelect
             id="time"
             size="small"
-            name="time"
+            name="security.session_timeout.autometic_log_out_time"
             options={[
               { id: "opt1", label: "5 minutes", value: "5" },
               { id: "opt2", label: "10 minutes", value: "10" },
@@ -166,12 +206,30 @@ const OrganizationSecuritylSettings = () => {
             Restricted File Types
           </Label>
           <div className="w-full">
-            <Title as="h6" fontWeight="normal">
+            <p
+              className="text-blue-600 underline  cursor-pointer"
+              onClick={() => {
+                setOpenConfigureRestrictedFileTypes(true);
+              }}
+            >
               Configure restricted file types
-            </Title>
+            </p>
           </div>
         </div>
       </div>
+      <GuestLoginModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      <ChangePassphrase
+        isModalOpen={isPassphraseOpen}
+        closeModal={closePassphraseModal}
+      />
+      <ChangePasswordPolicy
+        isModalOpen={openChangePasswordPolicy}
+        closeModal={closePasswordPolicyModal}
+      />
+      <ConfigureRestrictedFileTypesModal
+        isModalOpen={openConfigureRestrictedFileTypes}
+        closeModal={closeConfigureRestrictedFileTypes}
+      />
     </Container>
   );
 };

@@ -1,4 +1,3 @@
-import Label from "@/components/ui/label";
 import { getErrorMessageByPropertyName } from "../../../utils/schema-validators";
 import { useFormContext, Controller } from "react-hook-form";
 import { Checkbox } from "rizzui"; // Assuming you have this component available
@@ -51,25 +50,40 @@ const FormCheckbox = ({
           <Controller
             control={control}
             name={name}
-            defaultValue={[]} // Ensure the default value is an empty array
             rules={validation}
             render={({ field }) => (
               <div>
-                {options.map((option) => (
-                  <Checkbox
-                    key={option.id}
-                    label={option.label}
-                    size="lg"
-                    checked={field.value.includes(option.value)}
-                    onChange={() => {
-                      const newValue = field.value.includes(option.value)
-                        ? field.value.filter((v: string) => v !== option.value)
-                        : [...field.value, option.value];
-                      field.onChange(newValue);
-                    }}
-                    className="mt-2"
-                  />
-                ))}
+                {options.length > 0 ? (
+                  <>
+                    {options.map((option) => (
+                      <Checkbox
+                        key={option.id}
+                        label={option.label}
+                        size="lg"
+                        checked={field.value.includes(option.value)}
+                        onChange={() => {
+                          const newValue = field.value.includes(option.value)
+                            ? field.value.filter(
+                                (v: string) => v !== option.value
+                              )
+                            : [...field.value, option.value];
+                          field.onChange(newValue);
+                        }}
+                        className="mt-2"
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <Checkbox
+                      label={label} // Optionally pass label here if needed
+                      size="lg"
+                      checked={field.value} // Use field.value directly for single checkbox
+                      onChange={(e) => field.onChange(e.target.checked)} // Update field.value directly with checkbox state
+                      className="mt-2"
+                    />
+                  </>
+                )}
               </div>
             )}
           />

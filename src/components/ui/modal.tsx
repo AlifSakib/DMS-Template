@@ -3,7 +3,7 @@ import { Modal } from "rizzui";
 
 interface ReusableModalProps {
   isOpen: boolean;
-  size?: "sm" | "lg";
+  size?: "sm" | "lg" | "md" | "full" | "xl";
   onClose: () => void;
   children: ReactNode;
 }
@@ -14,13 +14,22 @@ const ReusableModal = ({
   onClose,
   children,
 }: ReusableModalProps) => {
+  const handleClose = (e: React.MouseEvent) => {
+    // Prevent closing on backdrop click
+    if (e.target === e.currentTarget) {
+      return;
+    }
+    onClose();
+  };
+
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      // @ts-ignore
+      onClose={handleClose}
       size={size}
       overlayClassName="backdrop-blur"
-      containerClassName="!rounded-none p-4"
+      containerClassName="!rounded-none p-4 min-w-[800px] "
     >
       {children}
     </Modal>

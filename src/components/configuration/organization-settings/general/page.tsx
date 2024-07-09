@@ -1,18 +1,13 @@
 import FormCheckbox from "@/components/forms/form-checkbox";
 import FormInput from "@/components/forms/form-input/form-input";
 import FormSelect from "@/components/forms/form-select";
+import FormSingleCheckbox from "@/components/forms/form-single-checkbox";
 import Container from "@/components/ui/container";
 import HolidayTable from "@/components/ui/holiday-table";
 import Label from "@/components/ui/label";
 import SectionTitle from "@/components/ui/section-title";
-import { useForm } from "react-hook-form";
 
 const OrganizationGeneralSettings = () => {
-  const methods = useForm<any>({
-    defaultValues: {
-      holidays: [{ date: "" }],
-    },
-  });
   return (
     <Container>
       <SectionTitle title="Online Editing" tag="h6" weight="medium" />
@@ -22,16 +17,8 @@ const OrganizationGeneralSettings = () => {
             Microsoft Office Online
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="microsoft_office_online"
-              options={[
-                {
-                  id: "microsoft_office_online",
-                  label: "Enable online editing of Microsoft Office files",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
+            <FormSingleCheckbox
+              name="general.online_editing.microsoft_office_online"
               label="Enable online editing of Microsoft Office files"
             />
           </div>
@@ -44,17 +31,8 @@ const OrganizationGeneralSettings = () => {
             Microsoft Teams Integration
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="microsoft_teams_integration"
-              options={[
-                {
-                  id: "opt1",
-                  label:
-                    "Enable the sharing functionality with Microsoft Teams",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
+            <FormSingleCheckbox
+              name="general.collaboration.microsoft_teams_integration"
               label="Enable the sharing functionality with Microsoft Teams"
             />
           </div>
@@ -67,7 +45,11 @@ const OrganizationGeneralSettings = () => {
             Organization GUID
           </Label>
           <div className="w-full">
-            <FormInput name="passphrase" placeholder="Demo ID" size="small" />
+            <FormInput
+              name="general.diagnostics_and_feedback.organization_guid"
+              placeholder="Demo ID"
+              size="small"
+            />
           </div>
         </div>
         <div className="col-span-2  flex flex-col gap-2 lg:gap-5 lg:flex-row lg:items-center ">
@@ -75,16 +57,8 @@ const OrganizationGeneralSettings = () => {
             Customer Experience Improvement Program (CEIP)
           </Label>
           <div className="w-full">
-            <FormCheckbox
-              name="customer_experience_improvement_program_(CEIP)"
-              options={[
-                {
-                  id: "opt1",
-                  label: "Customer Experience Improvement Program (CEIP)",
-                  value: "false",
-                },
-                // Add more options as needed
-              ]}
+            <FormSingleCheckbox
+              name="general.diagnostics_and_feedback.customer_experience_improvement_program_ceip"
               label="Customer Experience Improvement Program (CEIP)"
             />
           </div>
@@ -99,7 +73,7 @@ const OrganizationGeneralSettings = () => {
 
           <FormSelect
             size="small"
-            name="language"
+            name="general.time_and_language.language"
             id="language"
             options={[
               { id: "opt1", label: "English", value: "eng" },
@@ -119,7 +93,7 @@ const OrganizationGeneralSettings = () => {
           <FormSelect
             id="date-or-number-format"
             size="small"
-            name="date-or-number-format"
+            name="general.time_and_language.date_or_number_format"
             options={[
               { id: "opt1", label: "English", value: "eng" },
               { id: "opt2", label: "Spanish", value: "spa" },
@@ -138,7 +112,7 @@ const OrganizationGeneralSettings = () => {
           <FormSelect
             id="time-zone"
             size="small"
-            name="date-or-number-format"
+            name="general.time_and_language.timezone"
             options={[
               { id: "opt1", label: "English", value: "eng" },
               { id: "opt2", label: "Spanish", value: "spa" },
@@ -158,7 +132,7 @@ const OrganizationGeneralSettings = () => {
           </Label>
           <div className="w-full">
             <FormCheckbox
-              name="working_days"
+              name="general.time_and_language.working_days"
               options={[
                 { id: "opt1", label: "Saturday", value: "sat" },
                 { id: "opt2", label: "Sunday", value: "sun" },
@@ -182,30 +156,55 @@ const OrganizationGeneralSettings = () => {
           <div className="flex gap-4">
             <div className="w-40">
               <FormInput
-                name="working_time"
+                name="general.time_and_language.working_time.start"
                 placeholder="Demo Time"
                 type="time"
               />
             </div>
             <div className="w-40">
               <FormInput
-                name="working_time"
+                name="general.time_and_language.working_time.end"
                 placeholder="Demo Time"
                 type="time"
               />
             </div>
           </div>
         </div>
-        <div className="col-span-2  flex flex-col gap-2 lg:gap-5 lg:flex-row  ">
+        <div className="col-span-2  flex flex-col gap-2 lg:gap-5 lg:flex-row  mt-4 ">
           <Label
             htmlFor="hrFullName2"
             className="lg:min-w-[260px] lg:text-end lg:mt-3"
           >
             Holidays
           </Label>
-          <div className="flex gap-4 w-96">
-            <HolidayTable name="holidays" />
+          <div className="flex gap-4">
+            <HolidayTable name="general.time_and_language.holidays" />
           </div>
+        </div>
+      </div>
+      <SectionTitle title="Export encoding" tag="h6" weight="medium" />
+      <div className="col-span-2  flex flex-col gap-2 lg:gap-5 lg:flex-row ">
+        <div>
+          <Label htmlFor="hrFullName2" className="lg:min-w-[260px] lg:text-end">
+            Encoding default
+          </Label>
+        </div>
+
+        <div>
+          <p>{`Set an organization's encoding default for exported CSV lists`}</p>
+          <FormSelect
+            id="encoding-default"
+            size="large"
+            name="general.export_encoding.encoding_default"
+            options={[
+              { id: "opt1", label: "English", value: "eng" },
+              { id: "opt2", label: "Spanish", value: "spa" },
+              { id: "opt3", label: "French", value: "fre" },
+              { id: "opt4", label: "German", value: "ger" },
+              { id: "opt5", label: "Italian", value: "ita" },
+              { id: "opt6", label: "Japanese", value: "jpn" },
+            ]}
+          />
         </div>
       </div>
     </Container>

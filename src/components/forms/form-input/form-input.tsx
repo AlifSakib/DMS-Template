@@ -12,6 +12,7 @@ interface IInput {
   validation?: object;
   label?: string;
   required?: boolean;
+  disabled?: boolean;
 }
 
 const FormInput = ({
@@ -24,6 +25,7 @@ const FormInput = ({
   validation,
   label,
   required,
+  disabled,
 }: IInput) => {
   const {
     control,
@@ -42,6 +44,7 @@ const FormInput = ({
           <Input
             label={label ? `${label} ${required ? "*" : ""}` : ""}
             placeholder={placeholder}
+            disabled={disabled}
             type={
               type as
                 | "number"
